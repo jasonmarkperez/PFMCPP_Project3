@@ -51,12 +51,12 @@ struct CarWash            //1) a U.D.T. with a random number of member variables
  1)
  */
 
-struct Person{
+struct Person{ FIXME curly braces go on their own line. See Readme.MD for course coding style
     int age;
     double heightInCM;
     int numberOfPets;
 
-    struct Pet {
+    struct Pet { FIXME curly braces go on their own line. See Readme.MD for course coding style
         bool isCat;
         bool isDog;
         int age;
@@ -69,11 +69,11 @@ struct Person{
  2)
  */
 
-struct Synthesizer {
+struct Synthesizer { FIXME curly braces go on their own line. See Readme.MD for course coding style
     int polyphony;
     bool multitimbral;
 
-    struct Sequencer {
+    struct Sequencer { FIXME curly braces go on their own line. See Readme.MD for course coding style
         bool isPlaying = 0;
         bool playForward = 1;
         bool playReverse = 0;
@@ -88,7 +88,7 @@ struct Synthesizer {
  3)
  */
 
-struct Playlist {
+struct Playlist { FIXME curly braces go on their own line. See Readme.MD for course coding style
     bool isSharable = 1;
     int songs;
     double idOfCoverImage = 8717241; //ID for default image
@@ -102,11 +102,11 @@ struct Playlist {
  4)
  */
 
-struct Student{
+struct Student{ FIXME curly braces go on their own line. See Readme.MD for course coding style
     Person student;
     float currentGPA;
 
-    struct Class {
+    struct Class { FIXME curly braces go on their own line. See Readme.MD for course coding style
         float currentGrade;
         int daysMissed;
         void addAssignment(double assignmentID, int grade);
@@ -121,7 +121,7 @@ struct Student{
  5)
  */
 
-struct RadioShow {
+struct RadioShow { FIXME curly braces go on their own line. See Readme.MD for course coding style
     char showDays;
     int showTime;
     double hostID;
@@ -134,13 +134,13 @@ struct RadioShow {
  6)
  */
 
-struct Driver{
+struct Driver{ FIXME curly braces go on their own line. See Readme.MD for course coding style
     Person owner;
     bool licenseIsValid;
     int numberOfViolations;
     int numberOfCars;
 
-    struct Car {
+    struct Car { FIXME curly braces go on their own line. See Readme.MD for course coding style
         bool isRegistered;
         bool isSmogged;
 
@@ -157,7 +157,7 @@ struct Driver{
  7)
  */
 
-struct Bike {
+struct Bike { FIXME curly braces go on their own line. See Readme.MD for course coding style
     int numberOfGears;
     bool hasDiscBrakes;
     bool hasCarbonFrame;
@@ -168,12 +168,12 @@ struct Bike {
  8)
  */
 
-struct Artist {
+struct Artist { FIXME curly braces go on their own line. See Readme.MD for course coding style
     double genreId;
     bool isActive;
     Person artist;
 
-    struct Album {
+    struct Album { FIXME curly braces go on their own line. See Readme.MD for course coding style
         int numberOfTracks;
         bool isReleased;
     };
@@ -185,12 +185,12 @@ struct Artist {
  9)
  */
 
-struct Patient {
+struct Patient { FIXME curly braces go on their own line. See Readme.MD for course coding style
     Person patient;
     bool hasHadAnnual;
     double doctorId;
 
-    struct Visit {
+    struct Visit { FIXME curly braces go on their own line. See Readme.MD for course coding style
         int lastVisitDate;
         float icdCode;
         char icdPrefix;
@@ -204,7 +204,7 @@ struct Patient {
  10)
  */
 
-struct Band {
+struct Band { FIXME curly braces go on their own line. See Readme.MD for course coding style
     Artist member1;
     Artist member2;
     Driver tourDriver;
