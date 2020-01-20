@@ -103,6 +103,7 @@ struct Playlist {
  */
 
 struct Student{
+    Person student;
     float currentGPA;
 
     struct Class {
@@ -134,6 +135,7 @@ struct RadioShow {
  */
 
 struct Driver{
+    Person owner;
     bool licenseIsValid;
     int numberOfViolations;
     int numberOfCars;
@@ -159,17 +161,24 @@ struct Bike {
     int numberOfGears;
     bool hasDiscBrakes;
     bool hasCarbonFrame;
+    Person owner;
 };
 
 /*
  8)
  */
 
-struct Warddrobe {
-    int numberOfSweaters;
-    int numbersOfShirts;
+struct Artist {
+    double genreId;
+    bool isActive;
+    Person artist;
 
-    bool addItemsToWardrobe(int quantityOfSweaters, int quantityOfShirts);
+    struct Album {
+        int numberOfTracks;
+        bool isReleased;
+    };
+
+    bool addAlbumToArtist(int numberOfTracks, bool isReleased);
 };
 
 /*
@@ -177,7 +186,7 @@ struct Warddrobe {
  */
 
 struct Patient {
-    double patientId;
+    Person patient;
     bool hasHadAnnual;
     double doctorId;
 
@@ -195,17 +204,13 @@ struct Patient {
  10)
  */
 
-struct Artist {
-    double genreId;
-    bool isActive;
+struct Band {
+    Artist member1;
+    Artist member2;
+    Driver tourDriver;
+    RadioShow promotionalRadioShow;
+}
 
-    struct Album {
-        int numberOfTracks;
-        bool isReleased;
-    };
-
-    bool addAlbumToArtist(int numberOfTracks, bool isReleased);
-};
 
 #include <iostream>
 int main()
