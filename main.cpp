@@ -224,7 +224,7 @@ struct Band
     Artist member2;
     Driver tourDriver;
     RadioShow promotionalRadioShow;
-}
+};
 
 
 #include <iostream>
