@@ -51,7 +51,7 @@ struct CarWash            //1) a U.D.T. with a random number of member variables
  1)
  */
 
-struct Person
+struct Human
 {
     int age;
     double heightInCM;
@@ -109,7 +109,7 @@ struct Playlist
 
 struct Student
 {
-    Person student;
+    Human student;
     float currentGPA;
 
     struct Class
@@ -144,7 +144,7 @@ struct RadioShow
 
 struct Driver
 {
-    Person owner;
+    Human owner;
     bool licenseIsValid;
     int numberOfViolations;
     int numberOfCars;
@@ -171,7 +171,7 @@ struct Bike
     int numberOfGears;
     bool hasDiscBrakes;
     bool hasCarbonFrame;
-    Person owner;
+    Human owner;
 };
 
 /*
@@ -182,7 +182,7 @@ struct Artist
 {
     double genreId;
     bool isActive;
-    Person artist;
+    Human artist;
 
     struct Album 
     {
@@ -199,7 +199,7 @@ struct Artist
 
 struct Patient
 {
-    Person patient;
+    Human patient;
     bool hasHadAnnual;
     double doctorId;
 
