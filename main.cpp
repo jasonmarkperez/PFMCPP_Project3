@@ -69,7 +69,8 @@ struct Person{ FIXME curly braces go on their own line. See Readme.MD for course
  2)
  */
 
-struct Synthesizer { FIXME curly braces go on their own line. See Readme.MD for course coding style
+struct Synthesizer 
+{
     int polyphony;
     bool multitimbral;
 
@@ -88,7 +89,8 @@ struct Synthesizer { FIXME curly braces go on their own line. See Readme.MD for 
  3)
  */
 
-struct Playlist { FIXME curly braces go on their own line. See Readme.MD for course coding style
+struct Playlist 
+{
     bool isSharable = 1;
     int songs;
     double idOfCoverImage = 8717241; //ID for default image
@@ -102,7 +104,8 @@ struct Playlist { FIXME curly braces go on their own line. See Readme.MD for cou
  4)
  */
 
-struct Student{ FIXME curly braces go on their own line. See Readme.MD for course coding style
+struct Student
+{
     Person student;
     float currentGPA;
 
@@ -121,7 +124,8 @@ struct Student{ FIXME curly braces go on their own line. See Readme.MD for cours
  5)
  */
 
-struct RadioShow { FIXME curly braces go on their own line. See Readme.MD for course coding style
+struct RadioShow
+{
     char showDays;
     int showTime;
     double hostID;
@@ -134,7 +138,8 @@ struct RadioShow { FIXME curly braces go on their own line. See Readme.MD for co
  6)
  */
 
-struct Driver{ FIXME curly braces go on their own line. See Readme.MD for course coding style
+struct Driver
+{
     Person owner;
     bool licenseIsValid;
     int numberOfViolations;
@@ -152,12 +157,12 @@ struct Driver{ FIXME curly braces go on their own line. See Readme.MD for course
     int addCarToDriver(Car car);
 };
 
-
 /*
  7)
  */
 
-struct Bike { FIXME curly braces go on their own line. See Readme.MD for course coding style
+struct Bike
+{
     int numberOfGears;
     bool hasDiscBrakes;
     bool hasCarbonFrame;
@@ -168,7 +173,8 @@ struct Bike { FIXME curly braces go on their own line. See Readme.MD for course 
  8)
  */
 
-struct Artist { FIXME curly braces go on their own line. See Readme.MD for course coding style
+struct Artist
+{
     double genreId;
     bool isActive;
     Person artist;
@@ -185,7 +191,8 @@ struct Artist { FIXME curly braces go on their own line. See Readme.MD for cours
  9)
  */
 
-struct Patient { FIXME curly braces go on their own line. See Readme.MD for course coding style
+struct Patient
+{
     Person patient;
     bool hasHadAnnual;
     double doctorId;
@@ -204,7 +211,8 @@ struct Patient { FIXME curly braces go on their own line. See Readme.MD for cour
  10)
  */
 
-struct Band { FIXME curly braces go on their own line. See Readme.MD for course coding style
+struct Band
+{
     Artist member1;
     Artist member2;
     Driver tourDriver;
