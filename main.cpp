@@ -47,46 +47,185 @@ struct CarWash            //1) a U.D.T. with a random number of member variables
     Car myCar;  //5) a member variable whose type is a UDT.
 };
 
-
 /*
  1)
  */
+
+struct Human
+{
+    int age;
+    double heightInCM;
+    int numberOfPets;
+
+    struct Pet 
+    {
+        bool isCat;
+        bool isDog;
+        int age;
+    };
+
+    bool isPetHungry( Pet pet);
+};
 
 /*
  2)
  */
 
+struct Synthesizer 
+{
+    int polyphony;
+    bool multitimbral;
+
+    struct Sequencer
+    {
+        bool isPlaying = 0;
+        bool playForward = 1;
+        bool playReverse = 0;
+        void playSequence(int sequence);
+    };
+
+    Sequencer sequencer;
+    void playNote(int frequency);
+};
+
 /*
  3)
  */
+
+struct Playlist 
+{
+    bool isSharable = 1;
+    int songs;
+    double idOfCoverImage = 8717241; //ID for default image
+
+    bool addSongToPlaylist(int id);
+    bool deleteSongFromPlaylist(int id);
+    int listSongsInPlaylist();
+};
 
 /*
  4)
  */
 
+struct Student
+{
+    Human student;
+    float currentGPA;
+
+    struct Class
+    { 
+        float currentGrade;
+        int daysMissed;
+        void addAssignment(double assignmentID, int grade);
+        void addMissedDay(bool excused);
+    };
+
+    double calculateGPA();
+    double calculateTotalDaysMissed();
+};
+
 /*
  5)
  */
+
+struct RadioShow
+{
+    char showDays;
+    int showTime;
+    double hostID;
+
+    void updateShowTime(double hostID, char updatedShowDay, int updatedShowTime);
+};
+
 
 /*
  6)
  */
 
+struct Driver
+{
+    Human owner;
+    bool licenseIsValid;
+    int numberOfViolations;
+    int numberOfCars;
+
+    struct Car
+    {
+        bool isRegistered;
+        bool isSmogged;
+
+        bool registerCar();
+        bool smogCar();
+    };
+
+    bool isDriverAllowedToDrive();
+    int addCarToDriver(Car car);
+};
+
 /*
  7)
  */
+
+struct Bike
+{
+    int numberOfGears;
+    bool hasDiscBrakes;
+    bool hasCarbonFrame;
+    Human owner;
+};
 
 /*
  8)
  */
 
+struct Artist
+{
+    double genreId;
+    bool isActive;
+    Human artist;
+
+    struct Album 
+    {
+        int numberOfTracks;
+        bool isReleased;
+    };
+
+    bool addAlbumToArtist(int numberOfTracks, bool isReleased);
+};
+
 /*
  9)
  */
 
+struct Patient
+{
+    Human patient;
+    bool hasHadAnnual;
+    double doctorId;
+
+    struct Visit 
+    {
+        int lastVisitDate;
+        float icdCode;
+        char icdPrefix;
+    };
+
+    bool addVisit(Visit visit, double doctor);
+    /* why can't I use doctorId as a default? */
+};
+
 /*
  10)
  */
+
+struct Band
+{
+    Artist member1;
+    Artist member2;
+    Driver tourDriver;
+    RadioShow promotionalRadioShow;
+};
+
 
 #include <iostream>
 int main()
