@@ -25,7 +25,7 @@ struct Limb
     int stepSize();
 };
 
-struct Person
+struct Person FIXME copy the struct exactly as shown in the video.
 {   
     bool startWithLeftFoot;
     int distanceTraveled = 0;
