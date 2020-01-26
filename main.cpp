@@ -153,18 +153,18 @@ struct Synthesizer
     bool multitimbral;
 
     Sequencer sequencer;
-    void noteOn(int);
-    void noteOff(int);
+    void noteOn();
+    void noteOff();
 };
 
-void Synthesizer::noteOn(int note)
+void Synthesizer::noteOn()
 {
     if(notesOn < polyphony) {
         notesOn ++;
     }
 }
 
-void Synthesizer::noteOff(int note)
+void Synthesizer::noteOff()
 {
     notesOn --;
 }
@@ -233,12 +233,12 @@ struct Class
     float currentGrade;
     int daysMissed = 0;
 
-    void addMissedDay(bool);
+    void addMissedDay();
     void addStudent(Student);
 };
 
 
-void Class::addMissedDay(bool excused)
+void Class::addMissedDay()
 {
     daysMissed++;
 }
