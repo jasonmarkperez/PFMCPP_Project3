@@ -34,7 +34,7 @@ struct Person
     unsigned int SATScore;
     int distanceTraveled = 0;
     Limb leftFoot, rightFoot;
-    void run(int howFast, bool startWithLeftFoot);
+    void run(int, bool startWithLeftFoot);
 };
 
 int Limb::stepSize()
@@ -51,7 +51,7 @@ void Limb::stepBackward()
     steps--;
 }
 
-void Person::run(int howFast, bool startWithLeftFoot)
+void Person::run(int, bool startWithLeftFoot)
 {
     if(startWithLeftFoot)
     {
