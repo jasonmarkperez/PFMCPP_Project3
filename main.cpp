@@ -25,12 +25,16 @@ struct Limb
     int stepSize();
 };
 
-struct Person FIXME copy the struct exactly as shown in the video.
+struct Person
 {   
-    bool startWithLeftFoot;
+    int age;
+    int height;
+    float hairLength;
+    float GPA;
+    unsigned int SATScore;
     int distanceTraveled = 0;
     Limb leftFoot, rightFoot;
-    void run(bool);
+    void run(int howFast, bool startWithLeftFoot);
 };
 
 int Limb::stepSize()
@@ -47,7 +51,7 @@ void Limb::stepBackward()
     steps--;
 }
 
-void Person::run(bool startWithLeftFoot)
+void Person::run(int howFast, bool startWithLeftFoot)
 {
     if(startWithLeftFoot)
     {
