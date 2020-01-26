@@ -148,7 +148,7 @@ struct Sequencer
 
 struct Synthesizer 
 {
-    int polyphony = 0;
+    unsigned int polyphony = 0;
     unsigned int notesOn = 0;
     bool multitimbral;
 
