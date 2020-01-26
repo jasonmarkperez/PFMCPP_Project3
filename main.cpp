@@ -13,7 +13,7 @@ Create a branch named Part2
  1) write the definition for the Type that leftFoot and rightFoot are instantiations of.
     don't forget to define and implement the member functions 'stepForward()' and 'stepSize()'
     you should be able to deduce the return type of those functions based on their usage in Person::run()
-    You'll need to insert the Person struct from the video in the space below.
+    You'll need to insert the Person struct from the video in the space below. test comment
  */
 
 
