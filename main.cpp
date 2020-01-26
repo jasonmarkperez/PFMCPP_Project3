@@ -108,9 +108,9 @@ struct Human
     bool isPetHungry(Pet);
 };
 
-bool Human::isPetHungry(Pet pet)
+bool Human::isPetHungry(Pet ourPet)
 {
-    if(pet.isPetHungry){
+    if(ourPet.isPetHungry){
         std::cout << "Pet is hungry!" << std::endl;
         return true;
     }
@@ -196,10 +196,10 @@ struct Playlist
 
     void addSongToPlaylist(int);
     void deleteSongFromPlaylist(int);
-    int listSongsInPlaylist();
+    void listSongsInPlaylist();
 };
 
-int Playlist::listSongsInPlaylist()
+void Playlist::listSongsInPlaylist()
 {
     vector<int>::iterator it;   
     for(it = songs.begin(); it != songs.end(); it++) 
