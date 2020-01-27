@@ -161,13 +161,13 @@ struct Synthesizer
 void Synthesizer::noteOn()
 {
     if(notesOn < polyphony) {
-        notesOn ++; FIXME use preincrement, not postincrement.
+        ++ notesOn;
     }
 }
 
 void Synthesizer::noteOff()
 {
-    notesOn --; FIXME use pre-decrement, not post-decrement
+    -- notesOn;
 }
 
 
@@ -178,10 +178,9 @@ void Sequencer::recordNote(int note)
 
 void Sequencer::playBack()
 {
-    vector<int>::iterator it;   
-    for(it = notes.begin(); it != notes.end(); it++) FIXME use for( auto& n : notes ), not an explicit interator. 
+    for( auto& n : notes )
     {
-        cout << *it <<" "; 
+        cout << n << endl; 
     }
 }
 
@@ -202,10 +201,9 @@ struct Playlist
 
 void Playlist::listSongsInPlaylist()
 {
-    vector<int>::iterator it;   
-    for(it = songs.begin(); it != songs.end(); it++)  FIXME use for( auto& n : notes ), not an explicit interator. 
+    for( auto& s : songs )
     {
-        cout << *it <<" "; 
+        cout << s << endl; 
     }
 }
 
@@ -241,7 +239,7 @@ struct Class
 
 void Class::addMissedDay()
 {
-    daysMissed++; FIXME use preincrement, not postincrement.
+    ++daysMissed;
 }
 
 void Class::addStudent(Student student)
@@ -297,7 +295,7 @@ void Car::registerCar()
 void Car::addDriver(Human human)
 {
     driverName = human.name;
-    human.numberOfCars ++; FIXME use preincrement, not postincrement.
+    ++ human.numberOfCars;
 }
 
 
