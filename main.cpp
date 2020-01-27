@@ -110,7 +110,8 @@ struct Human
 
 bool Human::isPetHungry(Pet ourPet)
 {
-    if(ourPet.isPetHungry){
+    if(ourPet.isPetHungry)
+    {
         std::cout << "Pet is hungry!" << std::endl;
         return true;
     }
@@ -160,13 +161,13 @@ struct Synthesizer
 void Synthesizer::noteOn()
 {
     if(notesOn < polyphony) {
-        notesOn ++;
+        notesOn ++; FIXME use preincrement, not postincrement.
     }
 }
 
 void Synthesizer::noteOff()
 {
-    notesOn --;
+    notesOn --; FIXME use pre-decrement, not post-decrement
 }
 
 
@@ -178,7 +179,7 @@ void Sequencer::recordNote(int note)
 void Sequencer::playBack()
 {
     vector<int>::iterator it;   
-    for(it = notes.begin(); it != notes.end(); it++) 
+    for(it = notes.begin(); it != notes.end(); it++) FIXME use for( auto& n : notes ), not an explicit interator. 
     {
         cout << *it <<" "; 
     }
@@ -202,7 +203,7 @@ struct Playlist
 void Playlist::listSongsInPlaylist()
 {
     vector<int>::iterator it;   
-    for(it = songs.begin(); it != songs.end(); it++) 
+    for(it = songs.begin(); it != songs.end(); it++)  FIXME use for( auto& n : notes ), not an explicit interator. 
     {
         cout << *it <<" "; 
     }
@@ -240,7 +241,7 @@ struct Class
 
 void Class::addMissedDay()
 {
-    daysMissed++;
+    daysMissed++; FIXME use preincrement, not postincrement.
 }
 
 void Class::addStudent(Student student)
@@ -296,7 +297,7 @@ void Car::registerCar()
 void Car::addDriver(Human human)
 {
     driverName = human.name;
-    human.numberOfCars ++;
+    human.numberOfCars ++; FIXME use preincrement, not postincrement.
 }
 
 
