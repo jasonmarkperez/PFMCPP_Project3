@@ -1,3 +1,7 @@
+
+#include <iostream>
+#include <vector>
+using namespace std;
  /*
  Project 3 - Part 2 / 5
  Video: Chapter 2 Part 6
@@ -9,11 +13,58 @@ Create a branch named Part2
  1) write the definition for the Type that leftFoot and rightFoot are instantiations of.
     don't forget to define and implement the member functions 'stepForward()' and 'stepSize()'
     you should be able to deduce the return type of those functions based on their usage in Person::run()
-    You'll need to insert the Person struct from the video in the space below.
+    You'll need to insert the Person struct from the video in the space below. test comment
  */
 
 
+struct Limb 
+{
+    int steps;
+    void stepForward();
+    void stepBackward();
+    int stepSize();
+};
 
+struct Person
+{   
+    int age;
+    int height;
+    float hairLength;
+    float GPA;
+    unsigned int SATScore;
+    int distanceTraveled = 0;
+    Limb leftFoot, rightFoot;
+    void run(int, bool startWithLeftFoot);
+};
+
+int Limb::stepSize()
+{
+    return 1;
+}
+
+void Limb::stepForward()
+{
+    steps++;
+}
+void Limb::stepBackward()
+{
+    steps--;
+}
+
+void Person::run(int, bool startWithLeftFoot)
+{
+    if(startWithLeftFoot)
+    {
+        leftFoot.stepForward();
+        rightFoot.stepForward();
+    } 
+    else
+    {
+        rightFoot.stepForward();
+        leftFoot.stepForward();
+    }
+    distanceTraveled += leftFoot.stepSize() +rightFoot.stepSize();
+}
 
 
  /*
@@ -33,43 +84,105 @@ Create a branch named Part2
 /*
  1)
  */
+ 
+struct Pet 
+{
+    int age;
+    bool isCat, isDog, isPetHappy;
+    bool isPetHungry = true;
+    void feedPet();
+    void status();
+};
 
 struct Human
 {
-    int age;
-    double heightInCM;
-    int numberOfPets;
+    Pet pet;
+    string name;
 
-    struct Pet 
-    {
-        bool isCat;
-        bool isDog;
-        int age;
-    };
-
-    bool isPetHungry( Pet pet);
+    bool licenseIsValid;
+    bool hasBike;
+    int numberOfViolations;
+    int numberOfCars = 0;
+    // Car car;
+    bool isDriverAllowedToDrive();
+    bool isPetHungry(Pet);
 };
+
+bool Human::isPetHungry(Pet ourPet)
+{
+    if(ourPet.isPetHungry)
+    {
+        std::cout << "Pet is hungry!" << std::endl;
+        return true;
+    }
+    else 
+    {
+        return false;
+    }
+}
+
+void Pet::feedPet()
+{
+    isPetHungry = false;
+    isPetHappy = true;
+}
+
+void Pet::status(){
+    cout << isPetHungry << endl;
+    cout << isPetHappy << endl;
+}
 
 /*
  2)
  */
 
+struct Sequencer
+{
+    bool isPlaying = 0;
+    bool playForward = 1;
+    bool playReverse = 0;
+    vector<int> notes;
+
+    void recordNote(int);
+    void playBack();
+};
+
 struct Synthesizer 
 {
-    int polyphony;
+    unsigned int polyphony = 0;
+    unsigned int notesOn = 0;
     bool multitimbral;
 
-    struct Sequencer
-    {
-        bool isPlaying = 0;
-        bool playForward = 1;
-        bool playReverse = 0;
-        void playSequence(int sequence);
-    };
-
     Sequencer sequencer;
-    void playNote(int frequency);
+    void noteOn();
+    void noteOff();
 };
+
+void Synthesizer::noteOn()
+{
+    if(notesOn < polyphony) {
+        ++ notesOn;
+    }
+}
+
+void Synthesizer::noteOff()
+{
+    -- notesOn;
+}
+
+
+void Sequencer::recordNote(int note)
+{
+    notes.push_back(note);
+}
+
+void Sequencer::playBack()
+{
+    for( auto& n : notes )
+    {
+        cout << n << endl; 
+    }
+}
 
 /*
  3)
@@ -78,13 +191,26 @@ struct Synthesizer
 struct Playlist 
 {
     bool isSharable = 1;
-    int songs;
+    vector<int> songs;
     double idOfCoverImage = 8717241; //ID for default image
 
-    bool addSongToPlaylist(int id);
-    bool deleteSongFromPlaylist(int id);
-    int listSongsInPlaylist();
+    void addSongToPlaylist(int);
+    void deleteSongFromPlaylist(int);
+    void listSongsInPlaylist();
 };
+
+void Playlist::listSongsInPlaylist()
+{
+    for( auto& s : songs )
+    {
+        cout << s << endl; 
+    }
+}
+
+void Playlist::addSongToPlaylist(int id)
+{
+    songs.push_back(id);
+}
 
 /*
  4)
@@ -92,20 +218,34 @@ struct Playlist
 
 struct Student
 {
-    Human student;
+    string name;
     float currentGPA;
-
-    struct Class
-    { 
-        float currentGrade;
-        int daysMissed;
-        void addAssignment(double assignmentID, int grade);
-        void addMissedDay(bool excused);
-    };
 
     double calculateGPA();
     double calculateTotalDaysMissed();
 };
+
+
+struct Class
+{
+    vector<string> students;
+    float currentGrade;
+    int daysMissed = 0;
+
+    void addMissedDay();
+    void addStudent(Student);
+};
+
+
+void Class::addMissedDay()
+{
+    ++daysMissed;
+}
+
+void Class::addStudent(Student student)
+{
+    students.push_back(student.name);
+}
 
 /*
  5)
@@ -113,37 +253,51 @@ struct Student
 
 struct RadioShow
 {
-    char showDays;
-    int showTime;
-    double hostID;
-
-    void updateShowTime(double hostID, char updatedShowDay, int updatedShowTime);
+    string showDay;
+    string featuredBand;
+    double showTime;
+    int hostID;
+    void updateShowTime(int, string, double);
 };
 
+void RadioShow::updateShowTime(int updatedHostID, string updatedShowDay, double updatedShowTime)
+{
+    hostID = updatedHostID;
+    showDay = updatedShowDay;
+    showTime = updatedShowTime;
+}
 
 /*
  6)
  */
 
-struct Driver
+struct Car
 {
-    Human owner;
-    bool licenseIsValid;
-    int numberOfViolations;
-    int numberOfCars;
+    string driverName;
+    bool isRegistered;
+    bool isSmogged;
 
-    struct Car
-    {
-        bool isRegistered;
-        bool isSmogged;
-
-        bool registerCar();
-        bool smogCar();
-    };
-
-    bool isDriverAllowedToDrive();
-    int addCarToDriver(Car car);
+    void registerCar();
+    void smogCar();
+    void addDriver(Human);
 };
+
+void Car::smogCar()
+{
+    isSmogged = true;
+}
+
+void Car::registerCar()
+{   
+    isRegistered = true;
+}
+
+void Car::addDriver(Human human)
+{
+    driverName = human.name;
+    ++ human.numberOfCars;
+}
+
 
 /*
  7)
@@ -152,50 +306,68 @@ struct Driver
 struct Bike
 {
     int numberOfGears;
+    string bikeOwner;
     bool hasDiscBrakes;
     bool hasCarbonFrame;
-    Human owner;
+    void addBicyclist(Human);
 };
+
+void Bike::addBicyclist(Human human)
+{
+    human.hasBike = true;
+    bikeOwner = human.name;
+}
 
 /*
  8)
  */
 
+struct Album 
+{
+    int numberOfTracks;
+    bool isReleased;
+};
+
 struct Artist
 {
+    Album album;
     double genreId;
     bool isActive;
-    Human artist;
 
-    struct Album 
-    {
-        int numberOfTracks;
-        bool isReleased;
-    };
-
-    bool addAlbumToArtist(int numberOfTracks, bool isReleased);
+    void addAlbumToArtist(Album);
 };
+
+void Artist::addAlbumToArtist(Album addedAlbum)
+{
+    album = addedAlbum;
+}
 
 /*
  9)
  */
 
+struct Visit 
+{
+    int visitDate;
+    float icdCode;
+    char icdPrefix;
+};
+
 struct Patient
 {
     Human patient;
     bool hasHadAnnual;
-    double doctorId;
+    string doctor;
+    int lastVisitDate;
 
-    struct Visit 
-    {
-        int lastVisitDate;
-        float icdCode;
-        char icdPrefix;
-    };
-
-    bool addVisit(Visit visit, double doctor);
-    /* why can't I use doctorId as a default? */
+    void addVisit(Visit, string);
 };
+
+void Patient::addVisit(Visit visit, string visitDoctor)
+{
+    lastVisitDate = visit.visitDate;
+    doctor = visitDoctor;
+}
 
 /*
  10)
@@ -203,15 +375,19 @@ struct Patient
 
 struct Band
 {
+    string name;
     Artist member1;
     Artist member2;
-    Driver tourDriver;
     RadioShow promotionalRadioShow;
+    void addBandToRadioshow(RadioShow);
 };
 
+void Band::addBandToRadioshow(RadioShow rs)
+{
+    rs.featuredBand = name;
+}
 
-#include <iostream>
 int main()
 {
-    std::cout << "good to go!" << std::endl;
+
 }
