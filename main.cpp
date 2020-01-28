@@ -1,6 +1,6 @@
 #include <iostream>
 #include <vector>
-using namespace std;
+using namespace std; FIXME no cheating.  don't use 'using namespace std;'
 /*
  Project 3 - Part 3 / 5
  video: Chapter 2 - Part 8
