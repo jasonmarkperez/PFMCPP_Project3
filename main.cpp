@@ -13,9 +13,9 @@ using namespace std;
  1) Add a constructor for each User-Defined-Type.
  
  2) Instantiate a few of your user-defined types in the main function at the bottom of that file, and call some of those member functions.
- 
+
  3) make them print out something interesting via std::cout
- 
+
  After you finish defining each type/function:
  click the [run] button.  Clear up any errors or warnings as best you can.
  
@@ -24,7 +24,7 @@ using namespace std;
  Send me the the link to your repl.it in a DM on Slack
 
  Wait for my code review.
- 
+
  example:
  */
 
@@ -132,14 +132,14 @@ struct Synthesizer
     unsigned int polyphony, notesOn;
     bool multitimbral;
 
-    // Sequencer sequencer;
     void noteOn();
     void noteOff();
 };
 
 void Synthesizer::noteOn()
 {
-    if(notesOn < polyphony) {
+    if(notesOn < polyphony) 
+    {
         cout << "note on" << endl;
         ++ notesOn;
     }
@@ -153,7 +153,8 @@ void Synthesizer::noteOff()
 
 struct Sequencer
 {
-    Sequencer() {
+    Sequencer() 
+    {
         isPlaying = 0;
         playForward = 1;
         playReverse = 0;
