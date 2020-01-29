@@ -1,7 +1,6 @@
-
 #include <iostream>
 #include <vector>
-using namespace std;
+
 /*
  Project 3 - Part 3 / 5
  video: Chapter 2 - Part 8
@@ -14,9 +13,9 @@ using namespace std;
  1) Add a constructor for each User-Defined-Type.
  
  2) Instantiate a few of your user-defined types in the main function at the bottom of that file, and call some of those member functions.
- 
+
  3) make them print out something interesting via std::cout
- 
+
  After you finish defining each type/function:
  click the [run] button.  Clear up any errors or warnings as best you can.
  
@@ -25,11 +24,10 @@ using namespace std;
  Send me the the link to your repl.it in a DM on Slack
 
  Wait for my code review.
- 
+
  example:
  */
 
-#include <iostream>
 namespace Example 
 {
 struct UDT  // my user defined type
@@ -60,100 +58,126 @@ int main()
  
 struct Pet 
 {
+    Pet()
+    { 
+        isPetHungry = true;
+        isPetHappy = true;
+        age = 0;
+    }
     int age;
-    bool isCat, isDog, isPetHappy;
-    bool isPetHungry = true;
+    bool isCat, isDog, isPetHappy, isPetHungry;
     void feedPet();
     void status();
 };
 
 struct Human
 {
-    Pet pet;
-    string name;
+    Human() 
+    { 
+        numberOfCars = 0;
+        numberOfPets = 0;
+    }
+    std::string name;
 
-    bool licenseIsValid;
-    bool hasBike;
-    int numberOfViolations;
-    int numberOfCars = 0;
-    // Car car;
+    bool licenseIsValid, hasBike;
+    int numberOfViolations, numberOfCars, numberOfPets;
+
+    Pet acquirePet();
     bool isDriverAllowedToDrive();
-    bool isPetHungry(Pet);
+    std::string isPetHungry(Pet);
 };
 
-bool Human::isPetHungry(Pet ourPet)
+std::string Human::isPetHungry(Pet ourPet)
 {
     if(ourPet.isPetHungry)
     {
-        std::cout << "Pet is hungry!" << std::endl;
-        return true;
+        return "Pet is hungry!";
     }
     else 
     {
-        return false;
+        return "Pet is not hungry";
     }
+}
+
+Pet Human::acquirePet()
+{
+    Pet pet;
+    ++ numberOfPets;
+    return pet;
 }
 
 void Pet::feedPet()
 {
+    std::cout << "nom" << std::endl;
     isPetHungry = false;
     isPetHappy = true;
 }
 
 void Pet::status(){
-    cout << isPetHungry << endl;
-    cout << isPetHappy << endl;
+    std::cout << isPetHungry << std::endl;
+    std::cout << isPetHappy << std::endl;
 }
 
 /*
  2)
  */
 
-struct Sequencer
-{
-    bool isPlaying = 0;
-    bool playForward = 1;
-    bool playReverse = 0;
-    vector<int> notes;
-
-    void recordNote(int);
-    void playBack();
-};
-
 struct Synthesizer 
 {
-    unsigned int polyphony = 0;
-    unsigned int notesOn = 0;
+    Synthesizer()
+    {
+        polyphony = 16;
+        notesOn = 0;
+    }
+    unsigned int polyphony, notesOn;
     bool multitimbral;
 
-    Sequencer sequencer;
     void noteOn();
     void noteOff();
 };
 
 void Synthesizer::noteOn()
 {
-    if(notesOn < polyphony) {
+    if(notesOn < polyphony) 
+    {
+        std::cout << "note on" << std::endl;
         ++ notesOn;
     }
 }
 
 void Synthesizer::noteOff()
 {
+    std::cout << "note off" << std::endl;
     -- notesOn;
 }
 
+struct Sequencer
+{
+    Sequencer() 
+    {
+        isPlaying = 0;
+        playForward = 1;
+        playReverse = 0;
+    }
+    
+    bool isPlaying, playForward, playReverse;
+    std::vector<int> notes;
+
+    void recordNote(int);
+    void playBack(Synthesizer synth);
+};
 
 void Sequencer::recordNote(int note)
 {
     notes.push_back(note);
 }
 
-void Sequencer::playBack()
+void Sequencer::playBack(Synthesizer synth)
 {
     for( auto& n : notes )
-    {
-        cout << n << endl; 
+    {   synth.noteOn();
+        std::cout << n << std::endl; 
+        synth.noteOff();
     }
 }
 
@@ -163,9 +187,14 @@ void Sequencer::playBack()
 
 struct Playlist 
 {
-    bool isSharable = 1;
-    vector<int> songs;
-    double idOfCoverImage = 8717241; //ID for default image
+    Playlist()
+    {
+        isSharable = 1;
+        idOfCoverImage = 8717241; //ID for default image
+    }
+    bool isSharable;
+    std::vector<int> songs;
+    double idOfCoverImage;
 
     void addSongToPlaylist(int);
     void deleteSongFromPlaylist(int);
@@ -176,7 +205,7 @@ void Playlist::listSongsInPlaylist()
 {
     for( auto& s : songs )
     {
-        cout << s << endl; 
+        std::cout << s << std::endl; 
     }
 }
 
@@ -191,7 +220,12 @@ void Playlist::addSongToPlaylist(int id)
 
 struct Student
 {
-    string name;
+    Student()
+    {
+        currentGPA = 0.f;
+    }
+
+    std::string name;
     float currentGPA;
 
     double calculateGPA();
@@ -201,9 +235,13 @@ struct Student
 
 struct Class
 {
-    vector<string> students;
+    Class()
+    {
+        daysMissed = 0;
+    }
+    std::vector<std::string> students;
     float currentGrade;
-    int daysMissed = 0;
+    int daysMissed;
 
     void addMissedDay();
     void addStudent(Student);
@@ -226,14 +264,18 @@ void Class::addStudent(Student student)
 
 struct RadioShow
 {
-    string showDay;
-    string featuredBand;
+    RadioShow()
+    {
+        transmitterIsActive = false;
+    }
+    std::string showDay, featuredBand;
+    bool transmitterIsActive;
     double showTime;
     int hostID;
-    void updateShowTime(int, string, double);
+    void updateShowTime(int, std::string, double);
 };
 
-void RadioShow::updateShowTime(int updatedHostID, string updatedShowDay, double updatedShowTime)
+void RadioShow::updateShowTime(int updatedHostID, std::string updatedShowDay, double updatedShowTime)
 {
     hostID = updatedHostID;
     showDay = updatedShowDay;
@@ -246,9 +288,15 @@ void RadioShow::updateShowTime(int updatedHostID, string updatedShowDay, double 
 
 struct Car
 {
-    string driverName;
-    bool isRegistered;
-    bool isSmogged;
+    
+    Car()
+    {
+        isRegistered = false;
+        isSmogged = false;
+    }
+
+    std::string driverName;
+    bool isRegistered, isSmogged;
 
     void registerCar();
     void smogCar();
@@ -271,15 +319,19 @@ void Car::addDriver(Human human)
     ++ human.numberOfCars;
 }
 
-
 /*
  7)
  */
 
 struct Bike
 {
+    Bike()
+    {
+        hasDiscBrakes = false;
+        hasCarbonFrame = false;
+    }
     int numberOfGears;
-    string bikeOwner;
+    std::string bikeOwner;
     bool hasDiscBrakes;
     bool hasCarbonFrame;
     void addBicyclist(Human);
@@ -297,12 +349,23 @@ void Bike::addBicyclist(Human human)
 
 struct Album 
 {
+    Album()
+    {
+        isReleased = false;
+    }
+
     int numberOfTracks;
     bool isReleased;
+
 };
 
 struct Artist
 {
+    Artist()
+    {
+        isActive = true;
+    }
+
     Album album;
     double genreId;
     bool isActive;
@@ -328,15 +391,20 @@ struct Visit
 
 struct Patient
 {
+    Patient()
+    {
+        hasHadAnnual = false;
+    }
+
     Human patient;
     bool hasHadAnnual;
-    string doctor;
+    std::string doctor;
     int lastVisitDate;
 
-    void addVisit(Visit, string);
+    void addVisit(Visit, std::string);
 };
 
-void Patient::addVisit(Visit visit, string visitDoctor)
+void Patient::addVisit(Visit visit, std::string visitDoctor)
 {
     lastVisitDate = visit.visitDate;
     doctor = visitDoctor;
@@ -348,9 +416,14 @@ void Patient::addVisit(Visit visit, string visitDoctor)
 
 struct Band
 {
-    string name;
+    Band()
+    {
+        isOnTour = false;
+    }
+    std::string name;
     Artist member1;
     Artist member2;
+    bool isOnTour;
     RadioShow promotionalRadioShow;
     void addBandToRadioshow(RadioShow);
 };
@@ -362,5 +435,30 @@ void Band::addBandToRadioshow(RadioShow rs)
 
 int main()
 {
-    Example::main();
+    // Example::main();
+
+    Human jason;
+    jason.name = "Jason Perez";
+    std::cout << "starting number of pets: " << jason.numberOfPets << std::endl;
+    Pet ourPet = jason.acquirePet();
+    std::cout << "number of pets, after acquiring one: " << jason.numberOfPets << std::endl;
+    std::cout << jason.isPetHungry(ourPet) << std::endl;
+    ourPet.feedPet();
+    std::cout << jason.isPetHungry(ourPet) << std::endl;
+
+    Synthesizer moog;
+    moog.noteOn();
+    moog.noteOn();
+    std::cout << "play two, how many notes on: " << moog.notesOn << std::endl;
+    moog.noteOff();
+    std::cout << "remove one note, how many notes on: " << moog.notesOn << std::endl;
+
+    Sequencer sequencer;
+    sequencer.recordNote(24);
+    sequencer.recordNote(72);
+    sequencer.playBack(moog);
+
+    Car jetta;
+    jetta.addDriver(jason);
+    std::cout << jetta.driverName << " has " << jason.numberOfCars << " cars" << std::endl; //I'm confused why this isn't 1
 }
