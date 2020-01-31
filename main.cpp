@@ -83,22 +83,77 @@ struct Pet
 {
     bool isCat, isDog, isPetHappy, isPetHungry;
     int age;
-    Pet(std::string petType, std::string petName) : isCat(false), isDog(false), isPetHappy(false), isPetHungry(false), age(0) 
-    { 
+    double foodLevel;
+    std::string name;
 
+    Pet(std::string petType, std::string petName) : isCat(false), isDog(false), isPetHappy(false), isPetHungry(false), age(0), foodLevel(10.0), name(petName)
+    { 
+        std::cout << "A " << petType << " named " << petName << " is born!" << std::endl;
+
+        if(petType == "cat")
+        {
+            std::cout << "meow" << std::endl;
+            isCat = true;
+        }
+        else if (petType == "dog")
+        {
+            std::cout << "woof" << std::endl;
+            isDog = false;
+        }
+        else {
+            //handle other pet types
+        }
     }
 
-    void feedPet()
+    void feed()
     {
         std::cout << "nom" << std::endl;
         isPetHungry = false;
         isPetHappy = true;
     }
 
+    void walk(int howLong)
+    {   if(isPetHungry == false)
+        {
+            std::cout << "walking " << name << " for " << howLong << " minutes " << std::endl;
+            while(howLong > 0)
+            {
+                std::cout << ".";
+                howLong --;
+                foodLevel = foodLevel - 0.25;
+                if(foodLevel < 5 and foodLevel > 1)
+                {
+                    std::cout << name << " is getting hungry!!" << std::endl;
+                }
+
+                if(foodLevel < 1)
+                {
+                    std::cout << name << " is too hungry to walk, time to eat!" << std::endl;
+                    howLong = 0;
+                    isPetHungry = true;
+                }
+            }
+            std::cout << std::endl;
+        }
+        else 
+        {
+            std::cout << name << " is hungry, let's eat first! " << std::endl;
+        }
+        std::cout << "Done walking " << name << std::endl;
+        isPetHappy = true;
+    }
+
     void status()
     {
-        std::cout << isPetHungry << std::endl;
-        std::cout << isPetHappy << std::endl;
+        std::cout << name;
+        isPetHungry ?  std::cout << " is" : std::cout << " is not";
+        std::cout << " hungry" << std::endl;
+        
+        std::cout << "food level: " << foodLevel << std::endl;
+
+        std::cout << name;
+        isPetHappy ?  std::cout << " is" : std::cout << " is not";
+        std::cout << " happy" << std::endl;
     }
 };
 
@@ -144,13 +199,13 @@ struct Synthesizer
     {
         if(notesOn < polyphony) 
         {
-            std::cout << "note on" << std::endl;
+            std::cout << " -note on- ";
             ++ notesOn;
         }
     }
     void noteOff()
     {
-        std::cout << "note off" << std::endl;
+        std::cout << " -note off- ";
         -- notesOn;
     }
 };
@@ -160,8 +215,7 @@ struct Sequencer
     bool isPlaying, playForward, playReverse;
     std::vector<int> notes;
 
-    Sequencer() : isPlaying(0), playForward(1), playReverse(0),
-    notes({}) {}
+    Sequencer() : isPlaying(0), playForward(true), playReverse(false), notes({}) {}
 
     void recordNote(int note)
     {
@@ -170,11 +224,40 @@ struct Sequencer
 
     void playBack(Synthesizer synth)
     {
-        for( auto& n : notes )
-        {   synth.noteOn();
-            std::cout << n << std::endl; 
-            synth.noteOff();
+        if(playForward)
+        {
+            std::cout << "playing forward:: ";
+            for( auto& n : notes )
+            {   
+                std::cout << n << " "; 
+                synth.noteOn();
+                synth.noteOff();
+            }
         }
+
+        if(playReverse)
+        {
+            std::cout << "playing reverse:: ";
+            for( auto n = notes.rbegin(); n != notes.rend(); ++n)
+            {   
+                std::cout << *n << " "; 
+                synth.noteOn();
+                synth.noteOff();
+            }
+        }
+        std::cout << std::endl;
+    }
+
+    void setForwardPlayback()
+    {
+        playForward = true;
+        playReverse = false;
+    }
+
+    void setReversePlayback()
+    {
+        playForward = false;
+        playReverse = true;
     }
 };
 
@@ -391,23 +474,24 @@ int main()
     jason.name = "Jason Perez";
     std::cout << "starting number of pets: " << jason.numberOfPets << std::endl;
     Pet ourPet = jason.acquirePet("cat", "Clementine");
-    std::cout << "number of pets, after acquiring one: " << jason.numberOfPets << std::endl;
-    std::cout << jason.isPetHungry(ourPet) << std::endl;
-    ourPet.feedPet();
-    std::cout << jason.isPetHungry(ourPet) << std::endl;
+    ourPet.walk(10);
+    ourPet.walk(30);
+    ourPet.status();
 
-    // std::cout << "~~Synthesizers and Sequencers~~" << std::endl;
-    // Synthesizer moog;
-    // moog.noteOn();
-    // moog.noteOn();
-    // std::cout << "play two, how many notes on: " << moog.notesOn << std::endl;
-    // moog.noteOff();
-    // std::cout << "remove one note, how many notes on: " << moog.notesOn << std::endl;
+    std::cout << "~~Synthesizers and Sequencers~~" << std::endl;
+    Synthesizer moog;
+    moog.noteOn();
+    moog.noteOn();
+    std::cout << "play two, how many notes on: " << moog.notesOn << std::endl;
+    moog.noteOff();
+    std::cout << "remove one note, how many notes on: " << moog.notesOn << std::endl;    
 
-    // Sequencer sequencer;
-    // sequencer.recordNote(24);
-    // sequencer.recordNote(72);
-    // sequencer.playBack(moog);
+    Sequencer sequencer;
+    sequencer.recordNote(24);
+    sequencer.recordNote(72);
+    sequencer.playBack(moog);
+    sequencer.setReversePlayback();
+    sequencer.playBack(moog);
 
     // std::cout << "~~Car and Driver~~" << std::endl;
     // Car jetta;
