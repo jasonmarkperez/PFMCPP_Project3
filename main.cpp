@@ -83,8 +83,10 @@ struct Pet
 {
     bool isCat, isDog, isPetHappy, isPetHungry;
     int age;
-    Pet() : isCat(false), isDog(false), isPetHappy(false), isPetHungry(false),
-    age(0) { }
+    Pet(std::string petType, std::string petName) : isCat(false), isDog(false), isPetHappy(false), isPetHungry(false), age(0) 
+    { 
+
+    }
 
     void feedPet()
     {
@@ -92,6 +94,7 @@ struct Pet
         isPetHungry = false;
         isPetHappy = true;
     }
+
     void status()
     {
         std::cout << isPetHungry << std::endl;
@@ -107,9 +110,9 @@ struct Human
 
     Human() : numberOfViolations(0), numberOfCars(0), numberOfPets(0), name(""), licenseIsValid(false), hasBike(false){ }
 
-    Pet acquirePet()
+    Pet acquirePet(std::string petType, std::string petName)
     {
-        Pet pet;
+        Pet pet(petType, petName);
         ++ numberOfPets;
         return pet;
     }
@@ -387,27 +390,27 @@ int main()
     Human jason;
     jason.name = "Jason Perez";
     std::cout << "starting number of pets: " << jason.numberOfPets << std::endl;
-    Pet ourPet = jason.acquirePet();
+    Pet ourPet = jason.acquirePet("cat", "Clementine");
     std::cout << "number of pets, after acquiring one: " << jason.numberOfPets << std::endl;
     std::cout << jason.isPetHungry(ourPet) << std::endl;
     ourPet.feedPet();
     std::cout << jason.isPetHungry(ourPet) << std::endl;
 
-    std::cout << "~~Synthesizers and Sequencers~~" << std::endl;
-    Synthesizer moog;
-    moog.noteOn();
-    moog.noteOn();
-    std::cout << "play two, how many notes on: " << moog.notesOn << std::endl;
-    moog.noteOff();
-    std::cout << "remove one note, how many notes on: " << moog.notesOn << std::endl;
+    // std::cout << "~~Synthesizers and Sequencers~~" << std::endl;
+    // Synthesizer moog;
+    // moog.noteOn();
+    // moog.noteOn();
+    // std::cout << "play two, how many notes on: " << moog.notesOn << std::endl;
+    // moog.noteOff();
+    // std::cout << "remove one note, how many notes on: " << moog.notesOn << std::endl;
 
-    Sequencer sequencer;
-    sequencer.recordNote(24);
-    sequencer.recordNote(72);
-    sequencer.playBack(moog);
+    // Sequencer sequencer;
+    // sequencer.recordNote(24);
+    // sequencer.recordNote(72);
+    // sequencer.playBack(moog);
 
-    std::cout << "~~Car and Driver~~" << std::endl;
-    Car jetta;
-    jetta.addDriver(jason);
-    std::cout << jetta.driverName << " has " << jason.numberOfCars << " cars" << std::endl; 
+    // std::cout << "~~Car and Driver~~" << std::endl;
+    // Car jetta;
+    // jetta.addDriver(jason);
+    // std::cout << jetta.driverName << " has " << jason.numberOfCars << " cars" << std::endl; 
 }
