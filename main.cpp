@@ -113,7 +113,8 @@ struct Pet
     }
 
     void walk(int howLong)
-    {   if(isPetHungry == false)
+    {   
+        if(isPetHungry == false)
         {
             std::cout << "walking " << name << " for " << howLong << " minutes " << std::endl;
             while(howLong > 0)
@@ -121,6 +122,7 @@ struct Pet
                 std::cout << ".";
                 howLong --;
                 foodLevel = foodLevel - 0.25;
+
                 if(foodLevel < 5 and foodLevel > 1)
                 {
                     std::cout << name << " is getting hungry!!" << std::endl;
@@ -139,6 +141,7 @@ struct Pet
         {
             std::cout << name << " is hungry, let's eat first! " << std::endl;
         }
+        
         std::cout << "Done walking " << name << std::endl;
         isPetHappy = true;
     }
@@ -492,9 +495,4 @@ int main()
     sequencer.playBack(moog);
     sequencer.setReversePlayback();
     sequencer.playBack(moog);
-
-    // std::cout << "~~Car and Driver~~" << std::endl;
-    // Car jetta;
-    // jetta.addDriver(jason);
-    // std::cout << jetta.driverName << " has " << jason.numberOfCars << " cars" << std::endl; 
 }
